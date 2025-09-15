@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Empório Fernandes — Cardápio</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>.glass{background:rgba(255,255,255,0.06);backdrop-filter:blur(6px)}</style>
+</head>
+
+<body class="bg-gradient-to-b from-amber-900 via-amber-800 to-amber-900 min-h-screen text-white">
+<main class="max-w-4xl mx-auto px-4 py-8">
+<header class="text-center mb-8">
+<h1 class="text-3xl font-bold">Empório Fernandes</h1>
+<p class="text-white/70">Cardápio Digital — faça seu pedido!</p>
+</header>
+
+<!-- Cardápio -->
+<section>
+<h2 class="text-2xl font-semibold mb-4">Nosso Cardápio</h2>
+<div id="cardapio" class="grid sm:grid-cols-2 gap-6"></div>
+</section>
+
+
+<!-- Carrinho -->
+<section class="mt-10 glass border border-white/10 rounded-xl p-6">
+<h2 class="text-xl font-semibold mb-4">🛒 Seu Carrinho</h2>
+<ul id="carrinho-lista" class="space-y-2 text-sm"></ul>
+<p id="carrinho-total" class="mt-4 font-bold">Total: R$ 0,00</p>
+<button id="finalizar" class="mt-4 w-full bg-amber-600 hover:bg-amber-700 py-2 rounded-lg font-semibold">Finalizar Pedido</button>
+</section>
+</main>
+
+<script>
+const defaultProdutos = [
+{ id: 1, nome: "Café Expresso", preco: 5.0, img: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400" },
+{ id: 2, nome: "Cappuccino", preco: 8.0, img: "https://images.unsplash.com/photo-1527169402691-a6dd0ef0a3e8?w=400" }
+];
+
+
+let produtos = JSON.parse(localStorage.getItem("produtos")) || defaultProdutos;
+let carrinho = [];
+
+
+const cardapioDiv = document.getElementById("cardapio");
+const carrinhoLista = document.getElementById("carrinho-lista");
+const carrinhoTotal = document.getElementById("carrinho-total");
+
+
+function renderCardapio(){
+cardapioDiv.innerHTML="";
+produtos.forEach(produto=>{
+const item=document.createElement("div");
+item.className="bg-white/5 rounded-xl p-4 shadow hover:shadow-lg transition";
+item.innerHTML=`
+<img src="${produto.img}" class="rounded-lg mb-3 w-full h-40 object-cover"/>
+<h3 class="text-lg font-semibold">${produto.nome}</h3>
+<p class="text-white/70">R$ ${produto.preco.toFixed(2)}</p>
+<button class="mt-3 w-full bg-amber-600 hover:bg-amber-700 py-2 rounded-lg font-medium" onclick="adicionarCarrinho(${produto.id})">Adicionar</button>
+`;
+cardapioDiv.appendChild(item);
+});
+}
+
+
+function adicionarCarrinho(id){
+const produto = produtos.find(p=>p.id===id);
+carrinho.push(produto);
+atualizarCarrinho();
+}
+
+
+function atualizarCarrinho(){
+carrinhoLista.innerHTML="";
+let total=0;
+carrinho.forEach((item,i)=>{
+total+=item.preco;
+const li=document.createElement("li");
+li.className="flex justify-between items-center bg-white/5 px-3 py-1 rounded";
+li.innerHTML=`<span>${item.nome} — R$ ${item.preco.toFixed(2)}</span><button class="text-red-400 hover:text-red-600" onclick="removerItem(${i})">✕</button>`;
+carrinhoLista.appendChild(li);
+});
+carrinhoTotal.textContent=`Total: R$ ${total.toFixed(2)}`;
+}
+
+
+function removerItem(index){
+carrinho.splice(index,1);
+atualizarCarrinho();
+}
+
+
+document.getElementById("finalizar").addEventListener("click",()=>{
+if(carrinho.length===0) return alert("Seu carrinho está vazio!");
+const texto=carrinho.map(i=>`${i.nome} - R$ ${i.preco.toFixed(2)}`).join("%0A");
+const total=carrinho.reduce((acc,cur)=>acc+cur.preco,0);
+const mensagem=`Olá, gostaria de fazer um pedido:%0A${texto}%0ATotal: R$ ${total.toFixed(2)}`;
+window.open(`https://wa.me/5591999999999?text=${mensagem}`,"_blank");
+});
+
+
+renderCardapio();
+</script>
+</body>
+</html>

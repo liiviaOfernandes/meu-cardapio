@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Empório Fernandes — Link na bio</title>
+  <!-- Tailwind CDN (para protótipo rápido) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="description" content="Página de link único para redes sociais — modelo estilo bio.site" />
+  <!-- FAVICON (coloque seu arquivo em /assets/favicon.png e atualize o caminho) -->
+  <link rel="apple-touch-icon" sizes="180x180" href="img/id/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/id/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/id/favicon-16x16.png">
+  <link rel="manifest" href="img/id/site.webmanifest">
+  <style>
+    /* Pequenas customizações adicionais */
+    .glass { background: rgba(255, 255, 255, 0.06); backdrop-filter: blur(6px); }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 min-h-screen flex items-center justify-center py-12">
+  <main class="w-full max-w-md mx-auto text-center text-white px-4">
+    <!-- Card -->
+    <section class="bg-transparent glass border border-white/5 rounded-2xl p-6 shadow-2xl">
+      <!-- Avatar / Logo -->
+      <div class="w-36 h-36 mx-auto rounded-full overflow-hidden ring-2 ring-white/10">
+        <!-- substitua src pela sua imagem -->
+        <img src="img/id/logo.png" alt="Logo do Café" class="w-full h-full object-cover" />
+      </div>
+
+      <h1 class="mt-4 text-2xl font-semibold">Empório Fernandes</h1>
+      <p class="text-sm text-white/70 mt-1">Café artesanal • Doces • Delivery</p>
+
+      <!-- Botões principais -->
+      <div class="mt-6 space-y-3">
+        <a href="https://wa.me/+553496648069?text=Ol%" target="_blank" class="block w-full py-3 rounded-xl border border-white/10 hover:bg-white/5 transition">☕️ Pedir via WhatsApp</a>
+        <a href="index.html" target="_blank" class="block w-full py-3 rounded-xl border border-white/10 hover:bg-white/5 transition">📋 Cardápio</a>
+        <a href="https://maps.app.goo.gl/u3qRmgJRZArqktWQ9" target="_blank" class="block w-full py-3 rounded-xl border border-white/10 hover:bg-white/5 transition">📍 Como Chegar</a>
+      </div>
+
+      <!-- Links sociais / extras -->
+      <div class="mt-6 flex items-center justify-center gap-4">
+        <a href="#" aria-label="Instagram" class="text-white/80 hover:text-white">Instagram</a>
+        <a href="#" aria-label="Facebook" class="text-white/80 hover:text-white">Facebook</a>
+      </div>
+
+    </section>
+
+    <!-- Rodapé discreto -->
+    <footer class="mt-6 text-center text-white/40 text-xs">
+      Nossa Família Sempre com você!
+    </footer>
+  </main>
+
+  <!-- Script opcional: copiar número para área de transferência -->
+  <script>
+    // Exemplo: função para copiar telefone
+    function copyPhone() {
+      navigator.clipboard.writeText('+55 91 99999-9999').then(()=>{
+        alert('Telefone copiado!');
+      }).catch(()=>{alert('Não foi possível copiar.')});
+    }
+  </script>
+</body>
+</html>
